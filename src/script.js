@@ -3,27 +3,39 @@ var dataList = document.querySelector('ul');
 var fetchButton = document.getElementById('search-btn');
 var userInput = document.getElementById('city-name');
 
+
 var citySelect = "";
 var cityHistory = [];
-var apiKey = 
-// TODO: hot to store api key securely
+var apiKey = 'c582387e6a16ce13ecb6ac1b0d2c97e3' // have not commited api key to gitHub, working locally
+// TODO: store api key securely
 
+// the fetchButton event listener pushed chosenCity Object to local storage
 fetchButton.addEventListener('click', function(event){
   event.preventDefault();
  
-  
   // city object from user-form
   var chosenCity = {
     city: userInput.value.trim(),
-
-
   };
 
   citySelect = chosenCity.city
   console.log(chosenCity)
-
+  cityHistory.push(chosenCity)
+  localStorage.setItem("cities", JSON.stringify(cityHistory));
   getCurrentWeather();
+
 });
+
+function clearCurrentDisplay() {
+  // Clear the current weather information from the current weahter card
+  var currentWeather = document.getElementById("display-weathers");
+  // should clear the current weather display
+  // currentWeather.textContent= " ";
+  currentWeather.innerHTML= "";
+  // localStorage.clear(currentWeather)
+  
+}
+
 
 function init(){
   console.log("is this working?")
@@ -32,9 +44,9 @@ function init(){
 init()
 
 function getCurrentWeather() {
-  console.log("getApi called")
+  console.log("getWeather called")
+  // clearCurrentDisplay();
 
-  var currentWeather = document.getElementById("current-weather")
   var requestUrl = 
   `https://api.openweathermap.org/data/2.5/weather?q=${citySelect}&appid=${apiKey}&units=imperial`
 
@@ -45,12 +57,7 @@ function getCurrentWeather() {
     })
     .then(function (data) {
       console.log(data)
-      // for (var i = 0; i < data.length; i++) {
-      //   var listItem = document.createElement('li');
-      //   listItem.textContent = data[i]
-      //   dataList.appendChild(listItem);
-      //   console.log(listItem)
-      // }
+  
       var nameCity =  data.name 
       // var dateCity = "date:" + date.dt
       var temperatureCity = "Temp: " + data.main.temp
@@ -76,37 +83,37 @@ function getCurrentWeather() {
     var cityWeather = document.createElement('li');
     cityWeather.textContent = humidityCity;
     dataList.appendChild(cityWeather)
-
+    
     });
 }
  
 
     // cityWeather = [nameCity, dateCity, temperatureCity, humidityCity,
     //   windCity];
+// render the 5 day forecast for user input
+function getForecast(){
+  console.log("getForecastAPI called")
+  var currentWeather = document.getElementById("current-weather")
+  var requestUrl = 
+  "https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}";
 
-// function getForecast(){
-//   console.log("getApi called")
-//   var currentWeather = document.getElementById("current-weather")
-//   var requestUrl = 
-//   "https://api.openweathermap.org/data/2.5/forecast?lat={lat}&lon={lon}&appid={API key}";
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
 
-//   fetch(requestUrl)
-//     .then(function (response) {
-//       return response.json();
-
-//     })
-//     .then(function (data) {
-//       console.log(data)
-//       // for (var i = 0; i < data.length; i++) {
-//       //   var listItem = document.createElement('li');
-//       //   listItem.textContent = data[i]
-//       //   dataList.appendChild(listItem);
-//       //   console.log(listItem)
-//       // }
-//       var cityName = "city: " + data.name 
-//       var cityTemp = "temp: " + data.main.temp
-//        console.log(cityName, cityTemp)
-//     });
-// }
+    })
+    .then(function (data) {
+      console.log(data)
+      // for (var i = 0; i < data.length; i++) {
+      //   var listItem = document.createElement('li');
+      //   listItem.textContent = data[i]
+      //   dataList.appendChild(listItem);
+      //   console.log(listItem)
+      // }
+      var cityName = "city: " + data.name 
+      var cityTemp = "temp: " + data.main.temp
+       console.log(cityName, cityTemp)
+    });
+}
 
 

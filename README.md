@@ -13,7 +13,7 @@ To view the project in your browser:
 1. You will need to clone down the repository from GitHub to your local machine. 
 2. Once you have the project locally, you will need to open it in VSCode IDE. Right-click on the `index.html` file, then select `default browser` from the dropdown menu. This will open the HTML page in the broswer of your choice.
 
-![Chrome's dev tools](./src/app/assets/images/)
+![Chrome's dev tools](./src/app/assets/images/weather-dashboard.png)
 
 ## Deployment
 
