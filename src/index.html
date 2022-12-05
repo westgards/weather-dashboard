@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="./app/css/style.css">
+    <title>Weather Forecast</title>
+</head>
+<body class="flex-column min-100-vh">
+    <header class="hero">
+        <h1>Weather Dashboard</h1>
+    </header>
+    <main class="flex-row justify-space-between">
+        <aside class="col-12 col-md-4">
+            <div class="card">
+                <h3 class="card-hearder text-uppercase">Search for a City</h3>
+                <form id="user-form" class="card-body">
+                    <label class="form-label" for="city"><i class="fas fa-city"></i></label>
+                    <!-- this will show the previous typed in searches -->
+                    <input name="city" id="city-name" type="text" 
+                    autofocus="true" class="form-input">
+                    <button id="search-btn" type="submit" class="btn">SEARCH</button>
+                    <h3 class="card-hearder text-uppercase">Search History</h3>
+                </form>
+            </div>
+        </aside>
+        <card class="display-weather card col-12 col-md-8">
+                <h3 class="card-hearder text-uppercase"id="display-weather">Current Weather</h3>
+                <ul>
+                </ul>
+            </div>
+        </card>
+    </main>    
+    <script src="./script.js"></script>
+</body>
+</html>
