@@ -14,7 +14,7 @@
         <h1>Weather Dashboard</h1>
     </header>
     <main class="flex-row justify-space-between">
-        <aside class="col-12 col-md-4">
+        <aside class="col-12 col-md-4" id="search-bar">
             <div class="card">
                 <h3 class="card-hearder text-uppercase">Search for a City</h3>
                 <form id="user-form" class="card-body">
@@ -27,11 +27,26 @@
                 </form>
             </div>
         </aside>
-        <card class="display-weather card col-12 col-md-8">
-                <h3 class="card-hearder text-uppercase"id="display-weather">Current Weather</h3>
+        <card class="display-weather card col-12 col-md-8 id=display-weather">
+                <h3 class="card-hearder text-uppercase" id="display-weathers">Current Weather</h3>
                 <ul>
                 </ul>
             </div>
+        </card>
+        <card class="display-weather card col-6 col-md-2">
+            <h3 class="card-hearder text-uppercase" id="day-01">Day 1</h3>
+        </card>
+        <card class="display-weather card col-6 col-md-2">
+            <h3 class="card-hearder text-uppercase" id="day-02">Day 2</h3>
+        </card>
+        <card class="display-weather card col-6 col-md-2">
+            <h3 class="card-hearder text-uppercase" id="day-03">Day 3</h3>
+        </card>
+        <card class="display-weather card col-6 col-md-2">
+            <h3 class="card-hearder text-uppercase" id="day-04">Day 4</h3>
+        </card>
+        <card class="display-weather card col-6 col-md-2">
+            <h3 class="card-hearder text-uppercase" id="day-05">Day 5</h3>
         </card>
     </main>    
     <script src="./script.js"></script>

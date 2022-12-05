@@ -109,6 +109,11 @@
   .hero p {
     max-width: 75%;
   }
+
+  #search-bar {
+    display: block;
+    float:left;
+  }
   
   #display-weather{
     text-align: left;
