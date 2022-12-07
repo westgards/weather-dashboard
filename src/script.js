@@ -5,8 +5,11 @@ var userInput = document.getElementById('city-name');
 
 
 var citySelect = "";
+var cityId = "";
 var cityHistory = [];
 var apiKey = 'c582387e6a16ce13ecb6ac1b0d2c97e3' // have not commited api key to gitHub, working locally
+var lat = "";
+var lon= "";
 // TODO: store api key securely
 
 // the fetchButton event listener pushed chosenCity Object to local storage
@@ -16,13 +19,19 @@ fetchButton.addEventListener('click', function(event){
   // city object from user-form
   var chosenCity = {
     city: userInput.value.trim(),
+    // id: userInput.value.trim(),
+    // icon: userInput.value.trim()
   };
 
   citySelect = chosenCity.city
-  console.log(chosenCity)
+  cityId = chosenCity.city.id
+
+  // weatherIcon = chosenCity.list.weather.icon
+ 
   cityHistory.push(chosenCity)
   localStorage.setItem("cities", JSON.stringify(cityHistory));
   getCurrentWeather();
+  getForecast()
 
 });
 
@@ -57,9 +66,11 @@ function getCurrentWeather() {
     })
     .then(function (data) {
       console.log(data)
-  
+
+      
       var nameCity =  data.name 
-      // var dateCity = "date:" + date.dt
+      var dateCity = "date:" + data.dt
+      var iconCity = data.weather.icon
       var temperatureCity = "Temp: " + data.main.temp
       var humidityCity = "Humidity: " + data.main.humidity
       var windCity = "Wind: " + data.wind.speed
@@ -70,6 +81,10 @@ function getCurrentWeather() {
     var cityWeather = document.createElement('li');
     // city name
     cityWeather.textContent = nameCity;
+    dataList.appendChild(cityWeather)
+    var cityWeather = document.createElement('li');
+    // date
+    cityWeather.textContent = dateCity;
     dataList.appendChild(cityWeather)
     // city temperature
     var cityWeather = document.createElement('li');
@@ -91,29 +106,37 @@ function getCurrentWeather() {
     // cityWeather = [nameCity, dateCity, temperatureCity, humidityCity,
     //   windCity];
 // render the 5 day forecast for user input
-function getForecast(){
-  console.log("getForecastAPI called")
-  var currentWeather = document.getElementById("current-weather")
-  var requestUrl = 
-  "https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}";
+// function getForecast(){
+//   console.log("getForecastAPI called")
+//   console.log(cityId)
+ 
 
-  fetch(requestUrl)
-    .then(function (response) {
-      return response.json();
+//   // var lat = chosenCity.city.id.coord.lat;
+//   // var lon= chosenCity.city.id.coord.lat;
+//   var requestUrl = 
+//   `https://api.openweathermap.org/data/2.5/forecast?id=${cityId}&appid=${apiKey}`;
 
-    })
-    .then(function (data) {
-      console.log(data)
-      // for (var i = 0; i < data.length; i++) {
-      //   var listItem = document.createElement('li');
-      //   listItem.textContent = data[i]
-      //   dataList.appendChild(listItem);
-      //   console.log(listItem)
-      // }
-      var cityName = "city: " + data.name 
-      var cityTemp = "temp: " + data.main.temp
-       console.log(cityName, cityTemp)
-    });
-}
+//   fetch(requestUrl)
+//     .then(function (response) {
+//       return response.json();
+
+//     })
+//     .then(function (data) {
+//       console.log(data)
+//       // for (var i = 0; i < data.length; i++) {
+//       //   var listItem = document.createElement('li');
+//       //   listItem.textContent = data[i]
+//       //   dataList.appendChild(listItem);
+//       //   console.log(listItem)
+//       // }
+
+//       // date, icon, temp, wind, humidity
+//       var name = "city id: " + data.list.city.name
+//       var icon = data.list.weather.icon
+
+//       var temp = "temp: " + data.city.temp
+//        console.log(name, temp + "we are here!")
+//     });
+// }
 
 
